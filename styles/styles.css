@@ -38,7 +38,7 @@
   --light-color-opacity: rgba(255, 255, 255, 0.5);
   --tab-background-color: rgba(0, 0, 0, 0.02);
   /* brand-scoped header/footer variables with sensible defaults */
-  --nav-background-color: var(--brand-nav-background-color, #0000008c);
+  --nav-background-color: var(--brand-nav-background-color, #e91e8c);
   --nav-text-color: var(--brand-nav-text-color, #ffffff);
   --footer-background-color: var(--brand-footer-background-color, #000);
   --footer-text-color: var(--brand-footer-text-color, #ffffff);
@@ -310,7 +310,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -331,8 +331,8 @@ body.red-theme {
 }
 
 body.blue-theme {
-  --main-accent-color: #2563EB;   /* Modern Bright Blue */
-  --link-hover-color: #3B82F6;    /* Lighter Sky Blue */
+  --main-accent-color: #5514B4;   /* BT purple (documents.bt.com) */
+  --link-hover-color: #6B21A8;    /* Lighter purple */
 }
 
 body.green-theme {
