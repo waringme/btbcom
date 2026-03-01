@@ -331,8 +331,8 @@ body.red-theme {
 }
 
 body.blue-theme {
-  --main-accent-color: #2563EB;   /* Modern Bright Blue */
-  --link-hover-color: #3B82F6;    /* Lighter Sky Blue */
+  --main-accent-color: #5514B4;   /* BT purple (documents.bt.com) */
+  --link-hover-color: #6B21A8;    /* Lighter purple */
 }
 
 body.green-theme {
