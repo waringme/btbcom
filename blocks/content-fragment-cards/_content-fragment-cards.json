@@ -38,10 +38,11 @@
         {
           "component": "aem-content-fragment",
           "name": "reference",
-          "label": "Content Fragment",
+          "label": "Content Fragment Path",
           "valueType": "string",
           "required": true,
-          "variationName": "contentFragmentVariation"
+          "variationName": "contentFragmentVariation",
+          "description": "Path to the content fragment to display in this card."
         },
         {
           "component": "text",
