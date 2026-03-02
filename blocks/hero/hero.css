@@ -29,6 +29,18 @@
   margin-bottom: 0;
 }
 
+/* When CTA is inside a heading (e.g. h3), reset heading style so button shows correctly */
+.hero h1.button-container,
+.hero h2.button-container,
+.hero h3.button-container,
+.hero h4.button-container,
+.hero h5.button-container,
+.hero h6.button-container {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 32px 0 0;
+}
+
 /* --------------------------
    Headings & Paragraphs
    (BT documents.bt.com: same colour, size, font as "Why an interconnected supply chain matters")
@@ -69,17 +81,19 @@
   font-weight: 700;
 }
 
-/* Main hero title: same size as BT "Why an interconnected supply chain matters" (6.25rem) */
+/* Main hero title: same size as BT "Why an interconnected supply chain matters" (6.25rem), 75% width */
 .hero h1 {
   font-size: clamp(2.5rem, 8vw, 6.25rem);
   line-height: 1.15;
   letter-spacing: -0.02em;
+  color: var(--main-accent-color, #5514b4);
+  max-width: 75%;
 }
 
-/* Hero body/subheads: BT scale (2.625rem / 2rem for h2/h3, 1rem body) */
-/* Hero h2: match ripley-core__text-item__header-one__component (BT BtColorHeadingBrand #5514b4) */
+/* Hero body/subheads: BT scale (2rem for h3, 1rem body) */
+/* Hero h2: purple (BT BtColorHeadingBrand) and large display style */
 .hero h2 {
-  font-size: 2.625rem;
+  font-size: 100px;
   line-height: 1.3;
   color: var(--main-accent-color, #5514b4);
 }
@@ -134,6 +148,7 @@
 
 
 /* Primary CTA (BT style: purple, 12px 20px, letter-spacing) */
+.hero .button-container.cta-button a.button,
 .hero-wrapper .button-container.cta-button a.button {
   background-color: #5514B4;
   border: 0;
@@ -144,6 +159,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.hero .button-container.cta-button a.button::after,
 .hero-wrapper .button-container.cta-button a.button::after {
   content: "\f105";
   font-family: 'Font Awesome 5 Solid';
@@ -153,6 +169,7 @@
   color: var(--text-light);
 }
 
+.hero .button-container.cta-button a.button:hover,
 .hero-wrapper .button-container.cta-button a.button:hover {
   background-color: rgb(242, 157, 180) !important;
   color: #ffffff !important;
@@ -160,18 +177,21 @@
   transform: translateY(-1px);
 }
 
+.hero .button-container.cta-button a.button:hover::after,
 .hero-wrapper .button-container.cta-button a.button:hover::after {
   color: var(--text-light) !important;
   transform: translateX(2px);
 }
 
 /* Secondary CTA */
+.hero .button-container.cta-button-secondary a.button,
 .hero-wrapper .button-container.cta-button-secondary a.button {
   background: transparent;
   border: 2px solid var(--main-accent-color);
   color: var(--text-light);
 }
 
+.hero .button-container.cta-button-secondary a.button::after,
 .hero-wrapper .button-container.cta-button-secondary a.button::after {
   content: "\f105";
   font-family: 'Font Awesome 5 Solid';
@@ -181,17 +201,20 @@
   color: var(--text-light);
 }
 
+.hero .button-container.cta-button-secondary a.button:hover,
 .hero-wrapper .button-container.cta-button-secondary a.button:hover {
   background-color: var(--main-accent-color);
   color: var(--text-light);
 }
 
+.hero .button-container.cta-button-secondary a.button:hover::after,
 .hero-wrapper .button-container.cta-button-secondary a.button:hover::after {
   color: var(--text-dark);
   transform: translateX(2px);
 }
 
 /* Accessibility */
+.hero .button-container a.button:focus,
 .hero-wrapper .button-container a.button:focus {
   outline: 2px solid var(--main-accent-color);
   outline-offset: 2px;
@@ -398,6 +421,7 @@ picture {
 --------------------------- */
 @media (width >= 900px) {
   .hero { padding: 100px 50px 50px; min-height: 729px; }
+  .hero .button-container.cta-button a.button,
   .hero-wrapper .button-container.cta-button a.button { padding: 12px 20px; font-size: 1rem; }
 }
 
@@ -541,19 +565,28 @@ picture {
   border-color: var(--dark-color);
 }
 
-.hero.block.overlay {
-  background: rgb(255 255 255 / 75%);
+/* Light full overlay above the picture (does not hide image: first div has no position) */
+.hero.block.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgb(255 255 255 / 15%);
+  pointer-events: none;
 }
 
-.hero.block.overlay div:nth-child(2) {
+/* Text strip above overlay */
+.hero.block.overlay > div:nth-child(2) {
+  position: relative;
+  z-index: 1;
   padding: 20px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .hero.image-background-text-left div:nth-child(2),
 .hero.image-background-text-right div:nth-child(2) {
   padding: 20px;
-  background: rgb(0 0 0 / 50%);
+  background: rgba(228, 226, 226, 0.5);
 }
 
 /*button theme hero specific*/

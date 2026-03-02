@@ -41,11 +41,21 @@ export default function decorate(block) {
     block.classList.add('removeunderline');
   }
   
-  // Find the button container within the hero block
-  const buttonContainer = block.querySelector('p.button-container');
-  
+  // Ensure CTA link is styled as a button (link may be in p, div, or h3)
+  const textRow = block.querySelector(':scope > div:nth-child(2)');
+  const ctaLink = textRow?.querySelector('a[href]');
+  if (ctaLink && !ctaLink.classList.contains('button')) {
+    ctaLink.classList.add('button');
+    const parent = ctaLink.parentElement;
+    const isSingleLink = parent && [...parent.children].length === 1;
+    const tagOk = parent && ['P', 'DIV', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(parent.tagName);
+    if (isSingleLink && tagOk) {
+      parent.classList.add('button-container');
+    }
+  }
+
+  const buttonContainer = block.querySelector('.button-container');
   if (buttonContainer) {
-    // Add the CTA style class to the button container
     buttonContainer.classList.add(`cta-${ctaStyle}`);
   }
   
@@ -75,5 +85,4 @@ export default function decorate(block) {
   if (backgroundStyleDiv) {
     backgroundStyleDiv.style.display = 'none';
   }
-
 }
