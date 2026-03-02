@@ -356,57 +356,6 @@
     ]
   },
   {
-    "id": "content-fragment-card",
-    "fields": [
-      {
-        "component": "aem-content-fragment",
-        "name": "reference",
-        "label": "Content Fragment Path",
-        "valueType": "string",
-        "required": true,
-        "variationName": "contentFragmentVariation",
-        "description": "Path to the content fragment to display in this card."
-      },
-      {
-        "component": "text",
-        "name": "contentFragmentVariation",
-        "label": "Variation",
-        "value": "",
-        "valueType": "string",
-        "description": "Leave empty for master.",
-        "condition": {
-          "==": [
-            {
-              "var": "__alwaysFalse"
-            },
-            true
-          ]
-        }
-      },
-      {
-        "component": "select",
-        "name": "ctastyle",
-        "label": "CTA Style",
-        "valueType": "string",
-        "value": "button",
-        "options": [
-          {
-            "name": "Primary Button",
-            "value": "button"
-          },
-          {
-            "name": "Secondary Button",
-            "value": "button-secondary"
-          },
-          {
-            "name": "Dark Button",
-            "value": "button-dark"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "contentfragment",
     "fields": [
       {

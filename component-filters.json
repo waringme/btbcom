@@ -15,7 +15,6 @@
       "cards",
       "carousel",
       "columns",
-      "content-fragment-cards",
       "contentfragment",
       "dm-asset",
       "dm-template",
@@ -40,12 +39,6 @@
     "id": "cards",
     "components": [
       "card"
-    ]
-  },
-  {
-    "id": "content-fragment-cards",
-    "components": [
-      "content-fragment-card"
     ]
   },
   {
