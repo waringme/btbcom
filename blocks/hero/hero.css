@@ -542,10 +542,16 @@ picture {
 }
 
 .hero.block.overlay {
-  background-color: rgb(255 255 255 / 50%);
+  background: rgb(255 255 255 / 75%);
 }
 
-.hero.block.overlay div:nth-child(2),.hero.image-background-text-left div:nth-child(2),.hero.image-background-text-right div:nth-child(2) {
+.hero.block.overlay div:nth-child(2) {
+  padding: 20px;
+  background: transparent;
+}
+
+.hero.image-background-text-left div:nth-child(2),
+.hero.image-background-text-right div:nth-child(2) {
   padding: 20px;
   background: rgb(0 0 0 / 50%);
 }
