@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
 import { isAuthorEnvironment, moveInstrumentation } from '../../scripts/scripts.js';
 import { getHostname, mapAemPathToSitePath } from '../../scripts/utils.js';
 
@@ -133,8 +133,50 @@ async function buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle
 }
 
 /**
- * Decorate article block: each row = one article item (content fragment path + variation + style + cta).
- * Fetches each CF and renders as a card.
+ * Build one article card (li) from direct row content (image + text cells).
+ * If hasSixColumns: cells 2=image, 3=text. Else (4-column): cells 0=image, 1=text.
+ */
+function buildCardFromRow(row, cardStyle, ctaStyle, hasSixColumns) {
+  const li = document.createElement('li');
+  if (cardStyle && cardStyle !== 'default') {
+    li.className = cardStyle;
+  }
+
+  const cells = row.querySelectorAll(':scope > div');
+  const imageCell = hasSixColumns ? cells[2] : cells[0];
+  const textCell = hasSixColumns ? cells[3] : cells[1];
+
+  if (imageCell) {
+    const imageDiv = imageCell.cloneNode(true);
+    imageDiv.className = 'article-card-image';
+    li.appendChild(imageDiv);
+  }
+  if (textCell) {
+    const bodyDiv = textCell.cloneNode(true);
+    bodyDiv.className = 'article-card-body';
+    li.appendChild(bodyDiv);
+  }
+
+  const buttonContainers = li.querySelectorAll('p.button-container');
+  buttonContainers.forEach((buttonContainer) => {
+    buttonContainer.classList.remove('default', 'cta-button', 'cta-button-secondary', 'cta-button-dark', 'cta-default');
+    buttonContainer.classList.add(ctaStyle);
+  });
+
+  li.querySelectorAll('picture > img').forEach((img) => {
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    moveInstrumentation(img, optimizedPic.querySelector('img'));
+    img.closest('picture').replaceWith(optimizedPic);
+  });
+
+  moveInstrumentation(row, li);
+  return li;
+}
+
+/**
+ * Decorate article block. Each row = one article item.
+ * If Content Fragment path is set (cell 0): fetch CF and render from CF.
+ * Otherwise: render from direct Image (cell 2) and Text (cell 3); style from cell 4, CTA from cell 5.
  */
 export default async function decorate(block) {
   const hostnameFromPlaceholders = await getHostname();
@@ -149,21 +191,27 @@ export default async function decorate(block) {
 
   for (const row of rows) {
     const cells = row.querySelectorAll(':scope > div');
-    const pathCell = cells[0];
-    const variationCell = cells[1];
-    const styleCell = cells[2];
-    const ctaStyleCell = cells[3];
-    const contentPath = pathCell?.querySelector('a')?.textContent?.trim() ?? pathCell?.textContent?.trim();
-    if (!contentPath) continue;
+    const hasSixColumns = cells.length >= 6;
+    const pathCell = hasSixColumns ? cells[0] : null;
+    const variationCell = hasSixColumns ? cells[1] : null;
+    const contentPath = pathCell ? (pathCell.querySelector('a')?.textContent?.trim() ?? pathCell?.textContent?.trim()) : '';
     const variationname = variationCell?.textContent?.trim()?.toLowerCase()?.replace(/\s+/g, '_') || 'master';
+    const styleCell = hasSixColumns ? cells[4] : cells[2];
+    const ctaStyleCell = hasSixColumns ? cells[5] : cells[3];
     const cardStyle = styleCell?.textContent?.trim() || 'default';
     const ctaStyle = ctaStyleCell?.textContent?.trim() || 'button';
 
-    const cfReq = await fetchContentFragment(contentPath, variationname, env);
-    if (!cfReq) continue;
+    if (contentPath) {
+      const cfReq = await fetchContentFragment(contentPath, variationname, env);
+      if (cfReq) {
+        const li = await buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle, ctaStyle);
+        moveInstrumentation(row, li);
+        ul.appendChild(li);
+      }
+      continue;
+    }
 
-    const li = await buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle, ctaStyle);
-    moveInstrumentation(row, li);
+    const li = buildCardFromRow(row, cardStyle, ctaStyle, hasSixColumns);
     ul.appendChild(li);
   }
 

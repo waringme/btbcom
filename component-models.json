@@ -293,9 +293,9 @@
         "name": "reference",
         "label": "Content Fragment",
         "valueType": "string",
-        "required": true,
+        "required": false,
         "variationName": "contentFragmentVariation",
-        "description": "Content fragment to display in this article item."
+        "description": "Optional. If set, card content comes from this fragment. Otherwise use Image and Text below."
       },
       {
         "component": "text",
@@ -312,6 +312,22 @@
             true
           ]
         }
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "description": "Used when Content Fragment is not set."
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string",
+        "description": "Used when Content Fragment is not set."
       },
       {
         "component": "select",
