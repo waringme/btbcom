@@ -87,7 +87,25 @@
   margin-top: 0;
 }
 
+.article .article-card-body h3 {
+  line-height: 30px;
+  font-size: var(--heading-font-size-m);
+  font-weight: 500;
+  margin: 0 0 0.25em;
+}
 
+.article .article-card-subtitle {
+  margin: 0 0 0.5em;
+  font-size: var(--body-font-size-s, 0.9375rem);
+}
+
+.article .article-card-description {
+  margin: 0 0 0.5em;
+}
+
+.article .article-card-description p {
+  margin: 0;
+}
 
 /* Card Generic Styles*/
 .article > ul {

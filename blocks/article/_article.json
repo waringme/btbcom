@@ -36,18 +36,22 @@
       "id": "article-item",
       "fields": [
         {
-          "component": "reference",
+          "component": "aem-content-fragment",
+          "name": "reference",
+          "label": "Content Fragment",
           "valueType": "string",
-          "name": "image",
-          "label": "Image",
-          "multi": false
+          "required": true,
+          "variationName": "contentFragmentVariation",
+          "description": "Content fragment to display in this article item."
         },
         {
-          "component": "richtext",
-          "name": "text",
+          "component": "text",
+          "name": "contentFragmentVariation",
+          "label": "Variation",
           "value": "",
-          "label": "Text",
-          "valueType": "string"
+          "valueType": "string",
+          "description": "Leave empty for master.",
+          "condition": { "==": [{ "var": "__alwaysFalse" }, true] }
         },
         {
           "component": "select",
