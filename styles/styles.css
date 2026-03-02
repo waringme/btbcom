@@ -434,6 +434,7 @@ h2 {
 
 h3 {
   font-size: var(--heading-font-size-l);
+  color: var(--main-accent-color, #5514b4);
 }
 
 h4 {
@@ -657,9 +658,97 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
+/* Hero section container background */
+main > .section:has(.hero) {
+  background-color: #e6f3f8;
+}
+
+/* Default content wrapper – BT Arc style like documents.bt.com .jaHMMy content block */
+main .section > .default-content-wrapper {
+  font-family: var(--body-font-family, 'Adobe Clean', 'BT Curve', Arial, Helvetica, sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--dark-color, #131313);
+  background-color: ##e6f3f8;
+  padding: 32px 24px;
+  border-radius: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+main .section > .default-content-wrapper p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 1em;
+  color: var(--dark-color, #131313);
+}
+
+main .section > .default-content-wrapper p:last-child {
+  margin-bottom: 0;
+}
+
+main .section > .default-content-wrapper h1,
+main .section > .default-content-wrapper h2,
+main .section > .default-content-wrapper h4,
+main .section > .default-content-wrapper h5,
+main .section > .default-content-wrapper h6 {
+  font-family: var(--heading-font-family, 'Adobe Clean Bold', 'BT Curve', Arial, Helvetica, sans-serif);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.5em 0 0.5em;
+  color: var(--dark-color, #131313);
+}
+
+/* h3: BT-style lead/body block like documents.bt.com sc-cUkrys zPXtj */
+main .section > .default-content-wrapper h3 {
+  font-family: var(--body-font-family, 'Adobe Clean', 'BT Curve', Arial, Helvetica, sans-serif);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.5;
+  margin: 0 0 1em;
+  background-color: #e6f3f8
+  color: var(--main-accent-color, #5514b4);
+}
+
+main .section > .default-content-wrapper h3:last-child {
+  margin-bottom: 0;
+}
+
+main .section > .default-content-wrapper h1:first-child,
+main .section > .default-content-wrapper h2:first-child,
+main .section > .default-content-wrapper h3:first-child,
+main .section > .default-content-wrapper h4:first-child,
+main .section > .default-content-wrapper h5:first-child,
+main .section > .default-content-wrapper h6:first-child {
+  margin-top: 0;
+}
+
+main .section > .default-content-wrapper h1 { font-size: 2rem; }
+main .section > .default-content-wrapper h2 { font-size: 1.75rem; }
+main .section > .default-content-wrapper h4,
+main .section > .default-content-wrapper h5,
+main .section > .default-content-wrapper h6 { font-size: 1.125rem; }
+
+main .section > .default-content-wrapper a {
+  color: var(--main-accent-color, #5514b4);
+  text-decoration: none;
+}
+
+main .section > .default-content-wrapper a:hover {
+  text-decoration: underline;
+}
+
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 32px;
+  }
+
+  main .section > .default-content-wrapper {
+    padding: 40px 32px;
+    font-size: 16px;
   }
 }
 
