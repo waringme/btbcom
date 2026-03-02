@@ -40,8 +40,8 @@
   /* brand-scoped header/footer variables with sensible defaults */
   --nav-background-color: var(--brand-nav-background-color, #e91e8c);
   --nav-text-color: var(--brand-nav-text-color, #ffffff);
-  --footer-background-color: var(--brand-footer-background-color, #000);
-  --footer-text-color: var(--brand-footer-text-color, #ffffff);
+  --footer-background-color: var(--brand-footer-background-color, #ffffff);
+  --footer-text-color: var(--brand-footer-text-color, #131313);
   
   /* fonts */
   --body-font-family: 'Adobe Clean', roboto, roboto-fallback, sans-serif;
@@ -354,21 +354,30 @@ body footer {
   color: var(--footer-text-color);
 }
 /*theme header-footer*/
-body.red-theme header .nav-wrapper,
-body.red-theme footer {
+body.red-theme header .nav-wrapper {
   background-color: var(--main-accent-color);
   color: var(--text-light);
+}
+body.red-theme footer {
+  background-color: #ffffff;
+  color: var(--dark-color, #131313);
 }
 
-body.blue-theme header .nav-wrapper,
-body.blue-theme footer {
+body.blue-theme header .nav-wrapper {
   background-color: var(--main-accent-color);
   color: var(--text-light);
 }
-body.green-theme header .nav-wrapper,
-body.green-theme footer {
+body.blue-theme footer {
+  background-color: #ffffff;
+  color: var(--dark-color, #131313);
+}
+body.green-theme header .nav-wrapper {
   background-color: var(--main-accent-color);
   color: var(--text-light);
+}
+body.green-theme footer {
+  background-color: #ffffff;
+  color: var(--dark-color, #131313);
 }
 
 body.red-theme header .nav-wrapper nav .nav-sections ul > li > a::before{

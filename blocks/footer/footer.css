@@ -1,18 +1,28 @@
-footer {
-  background-color: var(--dark-color);
+footer,
+body footer {
+  background-color: #ffffff;
+  border-top: 4px solid var(--main-accent-color, #5514b4);
   font-size: var(--body-font-size-xs);
   font-family: var(--light-font-family);
-  background-color: var(--dark-color-opacity);
-  background-color: #000;
   width: 100%;
   z-index: 2;
-  color: #ffffff;
+  color: var(--dark-color, #131313);
 }
 
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
   padding: 40px 24px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Logo (first child, or element containing the img) on the right */
+footer .footer > div > :first-child {
+  margin-left: auto;
+  order: 1;
 }
 
 footer .footer p {
@@ -20,13 +30,13 @@ footer .footer p {
 }
 
 footer .footer img {
-  width: 100px;
+  width: 180px;
   height: auto;
   margin-bottom: 20px;
 }
 
 footer .footer a {
-  color: #ffffff;
+  color: var(--dark-color, #131313);
   text-decoration: none;
 }
 
