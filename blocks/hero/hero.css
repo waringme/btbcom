@@ -9,6 +9,7 @@
 
 .hero {
   position: relative;
+  z-index: 0; /* stacking context so .hero picture (z-index: -1) stays behind hero content, not section */
   padding: 100px 50px 50px;
   min-height: 729px;
   display: flex;
