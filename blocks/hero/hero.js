@@ -7,6 +7,16 @@ import { readBlockConfig } from '../../scripts/aem.js';
  * @param {Element} block
  */
 export default function decorate(block) {
+  // Ensure hero background image loads eagerly for LCP (overlay / image-background layouts)
+  const heroPicture = block.querySelector(':scope picture');
+  if (heroPicture) {
+    const img = heroPicture.querySelector('img');
+    if (img) {
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+    }
+  }
+
   // Get the enable underline setting from the block content (3rd div)
   const enableUnderline = block.querySelector(':scope div:nth-child(3) > div')?.textContent?.trim() || 'true';
   
