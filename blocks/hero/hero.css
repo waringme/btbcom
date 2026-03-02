@@ -31,7 +31,7 @@
 
 /* --------------------------
    Headings & Paragraphs
-   (BT documents.bt.com: same colour, size, font as "Why an interconnected..." across entire hero)
+   (BT documents.bt.com: same colour, size, font as "Why an interconnected supply chain matters")
 --------------------------- */
 .hero h1,
 .hero h2,
@@ -43,9 +43,9 @@
   width: 100%;
   max-width: 800px;
   margin: 0 0 1em;
-  color: #1a1a1a;
+  color: var(--dark-color, #131313);
   text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--heading-font-family, 'Adobe Clean Bold', 'BT Curve', Arial, Helvetica, sans-serif);
   font-weight: 400;
   text-shadow: none;
 }
