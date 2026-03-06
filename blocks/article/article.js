@@ -8,6 +8,20 @@ const CONFIG = {
 };
 
 /**
+ * Strip literal <p>, </p>, &lt;p&gt;, &lt;/p&gt; from text so they are not displayed in the editor or preview.
+ * @param {string} str - Raw description text that may contain p tags
+ * @returns {string} Cleaned text
+ */
+function stripParagraphTags(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&lt;\/?p&gt;/gi, '')
+    .replace(/<\/?p>/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
  * Fetch a single content fragment by path and variation (same API as content-fragment block).
  */
 async function fetchContentFragment(contentPath, variationname, env) {
@@ -119,7 +133,7 @@ async function buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle
   desc.setAttribute('data-aue-label', 'Description');
   desc.setAttribute('data-aue-type', 'richtext');
   const p = document.createElement('p');
-  p.textContent = cfReq?.description?.plaintext ?? '';
+  p.textContent = stripParagraphTags(cfReq?.description?.plaintext ?? '');
   desc.appendChild(p);
 
   const buttonP = document.createElement('p');

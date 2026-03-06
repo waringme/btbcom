@@ -4,6 +4,34 @@ import { getHostname, mapAemPathToSitePath } from '../../scripts/utils.js';
 import { readBlockConfig } from '../../scripts/aem.js';
 
 /**
+ * Strip literal <p>, </p>, &lt;p&gt;, &lt;/p&gt; from text so they are not displayed.
+ * @param {string} str - Raw description text that may contain p tags
+ * @returns {string} Cleaned text
+ */
+function stripParagraphTags(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&lt;\/?p&gt;/gi, '')
+    .replace(/<\/?p>/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Escape for safe injection into HTML.
+ * @param {string} str
+ * @returns {string}
+ */
+function escapeHtml(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
  *
  * @param {Element} block
  */
@@ -181,7 +209,7 @@ export default async function decorate(block) {
                 <h2 data-aue-prop="title" data-aue-label="Title" data-aue-type="text" class='cftitle'>${cfReq?.title}</h2>
                 <h3 data-aue-prop="subtitle" data-aue-label="SubTitle" data-aue-type="text" class='cfsubtitle'>${cfReq?.subtitle}</h3>
                 
-                <div data-aue-prop="description" data-aue-label="Description" data-aue-type="richtext" class='cfdescription'><p>${cfReq?.description?.plaintext || ''}</p></div>
+                <div data-aue-prop="description" data-aue-label="Description" data-aue-type="richtext" class='cfdescription'><p>${escapeHtml(stripParagraphTags(cfReq?.description?.plaintext || ''))}</p></div>
                  <p class="button-container ${ctaStyle}">
                   <a href="${ctaHref}" data-aue-prop="ctaurl" data-aue-label="Button Link/URL" data-aue-type="reference"  target="_blank" rel="noopener" data-aue-filter="page" class='button'>
                     <span data-aue-prop="ctalabel" data-aue-label="Button Label" data-aue-type="text">
