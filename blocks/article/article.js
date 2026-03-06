@@ -88,6 +88,9 @@ async function buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle
 
   const imageDiv = document.createElement('div');
   imageDiv.className = 'article-card-image';
+  imageDiv.setAttribute('data-aue-prop', 'bannerimage');
+  imageDiv.setAttribute('data-aue-label', 'Image');
+  imageDiv.setAttribute('data-aue-type', 'media');
   if (imgUrl) {
     const pic = document.createElement('picture');
     const img = document.createElement('img');
@@ -102,13 +105,19 @@ async function buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle
   const title = document.createElement('h3');
   title.textContent = cfReq?.title ?? '';
   title.setAttribute('data-aue-prop', 'title');
+  title.setAttribute('data-aue-label', 'Title');
+  title.setAttribute('data-aue-type', 'text');
   const subtitle = document.createElement('p');
   subtitle.classList.add('article-card-subtitle');
   subtitle.textContent = cfReq?.subtitle ?? '';
   subtitle.setAttribute('data-aue-prop', 'subtitle');
+  subtitle.setAttribute('data-aue-label', 'Subtitle');
+  subtitle.setAttribute('data-aue-type', 'text');
   const desc = document.createElement('div');
   desc.classList.add('article-card-description');
   desc.setAttribute('data-aue-prop', 'description');
+  desc.setAttribute('data-aue-label', 'Description');
+  desc.setAttribute('data-aue-type', 'richtext');
   const p = document.createElement('p');
   p.textContent = cfReq?.description?.plaintext ?? '';
   desc.appendChild(p);
@@ -119,10 +128,15 @@ async function buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle
   a.href = ctaHref;
   a.className = 'button';
   a.setAttribute('data-aue-prop', 'ctaurl');
+  a.setAttribute('data-aue-label', 'Button Link');
+  a.setAttribute('data-aue-type', 'reference');
+  a.setAttribute('data-aue-filter', 'page');
   a.target = '_blank';
   a.rel = 'noopener';
   const span = document.createElement('span');
   span.setAttribute('data-aue-prop', 'ctalabel');
+  span.setAttribute('data-aue-label', 'Button Label');
+  span.setAttribute('data-aue-type', 'text');
   span.textContent = cfReq?.ctalabel ?? 'Learn more';
   a.appendChild(span);
   buttonP.appendChild(a);
@@ -149,11 +163,17 @@ function buildCardFromRow(row, cardStyle, ctaStyle, hasSixColumns) {
   if (imageCell) {
     const imageDiv = imageCell.cloneNode(true);
     imageDiv.className = 'article-card-image';
+    imageDiv.setAttribute('data-aue-prop', 'image');
+    imageDiv.setAttribute('data-aue-label', 'Image');
+    imageDiv.setAttribute('data-aue-type', 'media');
     li.appendChild(imageDiv);
   }
   if (textCell) {
     const bodyDiv = textCell.cloneNode(true);
     bodyDiv.className = 'article-card-body';
+    bodyDiv.setAttribute('data-aue-prop', 'text');
+    bodyDiv.setAttribute('data-aue-label', 'Text');
+    bodyDiv.setAttribute('data-aue-type', 'richtext');
     li.appendChild(bodyDiv);
   }
 
