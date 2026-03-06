@@ -94,11 +94,6 @@
   margin: 0 0 0.25em;
 }
 
-.article .article-card-subtitle {
-  margin: 0 0 0.5em;
-  font-size: var(--body-font-size-s, 0.9375rem);
-}
-
 .article .article-card-description {
   margin: 0 0 0.5em;
 }
