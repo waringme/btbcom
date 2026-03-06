@@ -225,7 +225,8 @@ export default async function decorate(block) {
       const cfReq = await fetchContentFragment(contentPath, variationname, env);
       if (cfReq) {
         const li = await buildCardFromCf(cfReq, contentPath, variationname, env, cardStyle, ctaStyle);
-        moveInstrumentation(row, li);
+        /* Do not move row instrumentation: keep li's data-aue-resource pointing to the
+           content fragment so UE persists edits to the CF, not the block item row. */
         ul.appendChild(li);
       }
       continue;
